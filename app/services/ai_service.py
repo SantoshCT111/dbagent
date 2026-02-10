@@ -1,10 +1,16 @@
+from app.agent.graph import compiled_graph
 class AIService:
     def __init__(self):
-        self.model_name = "Gemini pro"
+        self.agent = compiled_graph  # This is the compiled graph from graph.py
 
     async def generate_response(self,user_text : str) -> str:
-        ai_reply = f"The ai pricesed : {user_text} and says : hello i am your budy" 
-        return ai_reply
+        inputs = {"messages": [("user", user_text)]}
+        result = await self.agent.ainvoke(inputs)
+
+
+        # The result will be a dictionary with the new messages
+
+        return result["messages"][-1].content   # Get the last message's text (the AI's reply)
     
 
 

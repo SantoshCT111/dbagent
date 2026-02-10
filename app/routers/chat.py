@@ -10,9 +10,8 @@ async def send_message(data: ChatMessage):
 
     text = data.text
     reply = await ai_brain.generate_response(text)
-    
 
-    return {f"reply : {reply}"}
+    return {"reply": reply}
 
 
 
